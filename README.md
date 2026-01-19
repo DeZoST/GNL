@@ -1,6 +1,6 @@
 # Get Next Line
 
-## 📌 Overview
+## Overview
 
 **Get Next Line** is a 42 school project written in **C**.
 The goal is to implement a function that reads a file descriptor **line by line**, returning one line per call, while handling arbitrary buffer sizes and preserving unread data between calls.
@@ -9,7 +9,7 @@ This project focuses on low-level I/O, memory management, and state persistence,
 
 ---
 
-## 🎯 Objective
+## Objective
 
 Implement the following function:
 
@@ -21,7 +21,7 @@ Each call to `get_next_line()` must return the next line from the file descripto
 
 ---
 
-## 📂 Files Structure
+## Files Structure
 
 ```
 .
@@ -32,7 +32,7 @@ Each call to `get_next_line()` must return the next line from the file descripto
 
 ---
 
-## ⚙️ Function Specification
+## Function Specification
 
 ### Prototype
 
@@ -54,7 +54,7 @@ char *get_next_line(int fd);
 
 ---
 
-## 🧠 Behavior & Rules
+## Behavior & Rules
 
 * The function reads the file **incrementally**
 * Each call returns **exactly one line**
@@ -71,7 +71,7 @@ char *get_next_line(int fd);
 
 ---
 
-## 🛠️ Compilation
+## Compilation
 
 The project must compile with or without the `BUFFER_SIZE` macro.
 
@@ -89,7 +89,7 @@ cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c
 
 ---
 
-## 🚫 Constraints
+## Constraints
 
 ### Allowed Functions
 
@@ -105,7 +105,7 @@ cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c
 
 ---
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 ### Design Choice
 
@@ -124,7 +124,7 @@ This approach satisfies all project constraints while ensuring correctness and e
 
 ---
 
-## 🧩 Main Components
+## Main Components
 
 * **Buffer Reader**
 
@@ -153,7 +153,7 @@ This approach satisfies all project constraints while ensuring correctness and e
 
 ---
 
-## ⚖️ Trade-offs & Decisions
+## Trade-offs & Decisions
 
 ### Why a Static Stash?
 
