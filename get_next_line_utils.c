@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alede-ba <alede-ba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 20:26:42 by alede-ba          #+#    #+#             */
-/*   Updated: 2026/01/18 20:58:34 by alede-ba         ###   ########.fr       */
+/*   Updated: 2026/01/19 15:03:13 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ size_t	ft_strlen(const char *s)
 Returns a pointer to the first occurrence of character c in string s
 Returns NULL if c is not found or s is NULL
 */
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
 	if (!s)
 		return (NULL);
@@ -76,7 +76,7 @@ char	*ft_strdup(const char *s)
 Joins s1 and s2 into a new string
 Frees s1 to prevent memory leaks
 */
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	i;
 	size_t	j;
