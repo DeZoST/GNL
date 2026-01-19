@@ -17,16 +17,13 @@
 # include <unistd.h>
 
 /*
-** BUFFER_SIZE may be defined at compile time.
-** We provide a default value to allow compilation without -D BUFFER_SIZE.
+We provide a default value to allow compilation without -D BUFFER_SIZE.
 */
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
 
 char	*get_next_line(int fd);
-
-/* utils */
 size_t	ft_strlen(const char *s);
 char	*ft_strchr(char *s, int c);
 char	*ft_strdup(const char *s);
