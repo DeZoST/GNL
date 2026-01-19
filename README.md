@@ -120,7 +120,7 @@ The implementation uses:
   4. Extract one line from the stash
   5. Preserve the remainder for the next call
 
-This approach satisfies all project constraints while ensuring correctness and efficiency.
+This approach satisfies all project constraints.
 
 ---
 
@@ -153,22 +153,17 @@ This approach satisfies all project constraints while ensuring correctness and e
 
 ---
 
-## Trade-offs & Decisions
+## Decisions
 
-### Why a Static Stash?
+### Why a Static Stash ?
 
 * Global variables are forbidden
 * Static local variables are the only legal way to persist state across calls
 
-### Why Incremental Reading?
+### Why Incremental Reading ?
 
 * Required by the subject
 * Prevents excessive memory usage
 * Works correctly with all `BUFFER_SIZE` values
-
-### Known Limitations
-
-* Assumes a single file descriptor (bonus not implemented)
-* Binary file behavior is undefined (as allowed by the subject)
 
 ---
