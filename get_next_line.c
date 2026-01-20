@@ -6,16 +6,26 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 20:55:20 by alede-ba          #+#    #+#             */
-/*   Updated: 2026/01/19 15:28:30 by alexis           ###   ########.fr       */
+/*   Updated: 2026/01/20 12:13:19 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-/*
-Reads from fd and appends data to stash until a new line is found,
-EOF is reached or an error occurs
-*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/18 20:55:20 by alede-ba          #+#    #+#             */
+/*   Updated: 2026/01/20 12:00:00 by alexis           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line.h"
+
 static char	*read_to_stash(int fd, char *stash)
 {
 	char	buffer[BUFFER_SIZE + 1];
@@ -26,23 +36,17 @@ static char	*read_to_stash(int fd, char *stash)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
-		{
-			free(stash);
-			return (NULL);
-		}
+			return (free(stash), NULL);
+		if (bytes_read == 0)
+			break ;
 		buffer[bytes_read] = '\0';
-		if (bytes_read > 0)
-			stash = ft_strjoin(stash, buffer);
+		stash = ft_strjoin(stash, buffer);
 		if (!stash)
 			return (NULL);
 	}
 	return (stash);
 }
 
-/*
-Extracts one line from stash
-The returned line includes '\n' if present
-*/
 static char	*extract_line(char *stash)
 {
 	size_t	i;
@@ -70,9 +74,6 @@ static char	*extract_line(char *stash)
 	return (line);
 }
 
-/*
-Removes the extracted line from stash and returns the remaining data
-*/
 static char	*save_remainder(char *stash)
 {
 	size_t	i;
@@ -90,10 +91,7 @@ static char	*save_remainder(char *stash)
 	i++;
 	new_stash = malloc(sizeof(char) * (ft_strlen(stash) - i + 1));
 	if (!new_stash)
-	{
-		free(stash);
-		return (NULL);
-	}
+		return (free(stash), NULL);
 	j = 0;
 	while (stash[i])
 		new_stash[j++] = stash[i++];
@@ -110,15 +108,11 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	stash = read_to_stash(fd, stash);
-	if (!stash)
-		return (NULL);
+	if (!stash || stash[0] == '\0')
+		return (free(stash), stash = NULL, NULL);
 	line = extract_line(stash);
-	if (!line)
-	{
-		free(stash);
-		stash = NULL;
-		return (NULL);
-	}
+	if (!line || line[0] == '\0')
+		return (free(line), free(stash), stash = NULL, NULL);
 	stash = save_remainder(stash);
 	return (line);
 }
