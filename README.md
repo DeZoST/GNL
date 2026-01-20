@@ -1,8 +1,10 @@
+*This project has been created as part of the 42 curriculum by alede-ba.*
+
 # Get Next Line
 
-## Overview
+## Description
 
-**Get Next Line** is a 42 school project written in **C**.
+**Get Next Line** is a project written in **C**.
 The goal is to implement a function that reads a file descriptor **line by line**, returning one line per call, while handling arbitrary buffer sizes and preserving unread data between calls.
 
 This project focuses on low-level I/O, memory management, and state persistence, under strict constraints.
@@ -71,9 +73,9 @@ char *get_next_line(int fd);
 
 ---
 
-## Compilation
+## Instructions
 
-The project must compile with or without the `BUFFER_SIZE` macro.
+The project must compile with or without `BUFFER_SIZE`.
 
 Example:
 
@@ -105,25 +107,6 @@ cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c
 
 ---
 
-## Architecture Overview
-
-### Design Choice
-
-The implementation uses:
-
-* A **static local buffer (stash)** to persist unread data across calls
-* A **pipeline-based architecture**:
-
-  1. Read from the file descriptor into a temporary buffer
-  2. Append data to a persistent stash
-  3. Stop reading when a newline is detected or EOF is reached
-  4. Extract one line from the stash
-  5. Preserve the remainder for the next call
-
-This approach satisfies all project constraints.
-
----
-
 ## Main Components
 
 * **Buffer Reader**
@@ -150,20 +133,5 @@ This approach satisfies all project constraints.
 
   * Custom implementations of common string functions
   * Required due to `libft` being forbidden
-
----
-
-## Decisions
-
-### Why a Static Stash ?
-
-* Global variables are forbidden
-* Static local variables are the only legal way to persist state across calls
-
-### Why Incremental Reading ?
-
-* Required by the subject
-* Prevents excessive memory usage
-* Works correctly with all `BUFFER_SIZE` values
 
 ---
