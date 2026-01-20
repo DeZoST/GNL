@@ -6,21 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 20:55:20 by alede-ba          #+#    #+#             */
-/*   Updated: 2026/01/20 12:13:19 by alexis           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "get_next_line.h"
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/18 20:55:20 by alede-ba          #+#    #+#             */
-/*   Updated: 2026/01/20 12:00:00 by alexis           ###   ########.fr       */
+/*   Updated: 2026/01/20 15:34:34 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +94,15 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	stash = read_to_stash(fd, stash);
-	if (!stash || stash[0] == '\0')
-		return (free(stash), stash = NULL, NULL);
+	if (!stash)
+		return (NULL);
 	line = extract_line(stash);
-	if (!line || line[0] == '\0')
-		return (free(line), free(stash), stash = NULL, NULL);
+	if (!line)
+	{
+		free(stash);
+		stash = NULL;
+		return (NULL);
+	}
 	stash = save_remainder(stash);
 	return (line);
 }
