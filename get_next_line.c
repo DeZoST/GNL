@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alede-ba <alede-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 20:55:20 by alede-ba          #+#    #+#             */
-/*   Updated: 2026/01/20 15:34:34 by alexis           ###   ########.fr       */
+/*   Updated: 2026/01/20 19:55:43 by alede-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,21 +111,14 @@ char	*get_next_line(int fd)
 #include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
-#include <stdlib.h>
 
-static void	print_title(char *title)
-{
-	printf("\n==============================\n");
-	printf("%s\n", title);
-	printf("==============================\n");
-}
 
 static void	run_test(int fd)
 {
 	char	*line;
 	while ((line = get_next_line(fd)))
 	{
-		write(1, line, ft_strlen(line));
+		printf("%s\n", line);
 
 		free(line);
 	}
@@ -136,42 +129,15 @@ int	main(void)
 {
 	int	fd;
 
-	print_title("Multiple lines");
-	fd = open("test.txt", O_RDONLY);
+	fd = open("README.md", O_RDONLY);
 	if (fd >= 0)
 	{
 		run_test(fd);
 		close(fd);
 	}
 
-	print_title("Single line without newline");
-	fd = open("single_no_nl.txt", O_RDONLY);
-	if (fd >= 0)
-	{
-		run_test(fd);
-		close(fd);
-	}
-
-	print_title("Empty file");
-	fd = open("empty.txt", O_RDONLY);
-	if (fd >= 0)
-	{
-		run_test(fd);
-		close(fd);
-	}
-
-	print_title("Only newlines");
-	fd = open("only_newlines.txt", O_RDONLY);
-	if (fd >= 0)
-	{
-		run_test(fd);
-		close(fd);
-	}
-
-	print_title("Invalid FD");
 	if (!get_next_line(-1))
-		printf("Correctly returned NULL\n");
-
+		printf("returned NULL\n");
 
 	return (0);
 }
