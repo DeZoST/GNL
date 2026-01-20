@@ -3,19 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alede-ba <alede-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 20:26:42 by alede-ba          #+#    #+#             */
-/*   Updated: 2026/01/19 15:03:13 by alexis           ###   ########.fr       */
+/*   Updated: 2026/01/20 18:36:07 by alede-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-/*
-Returns the length of string s
-Safe with NULL input
-*/
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
@@ -28,10 +24,6 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-/*
-Returns a pointer to the first occurrence of character c in string s
-Returns NULL if c is not found or s is NULL
-*/
 char	*ft_strchr(char *s, int c)
 {
 	if (!s)
@@ -47,9 +39,6 @@ char	*ft_strchr(char *s, int c)
 	return (NULL);
 }
 
-/*
-Duplicates string s into a newly allocated string
-*/
 char	*ft_strdup(const char *s)
 {
 	size_t	len;
@@ -72,10 +61,6 @@ char	*ft_strdup(const char *s)
 	return (dup);
 }
 
-/*
-Joins s1 and s2 into a new string
-Frees s1 to prevent memory leaks
-*/
 char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	i;
