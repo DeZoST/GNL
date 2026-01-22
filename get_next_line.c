@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alede-ba <alede-ba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 20:55:20 by alede-ba          #+#    #+#             */
-/*   Updated: 2026/01/20 19:55:43 by alede-ba         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:17:31 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,25 @@
 
 static char	*read_to_stash(int fd, char *stash)
 {
-	char	buffer[BUFFER_SIZE + 1];
+	char	*buffer;
 	ssize_t	bytes_read;
 
+	buffer = malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+		return (free(stash), NULL);
 	bytes_read = 1;
-	while (!ft_strchr(stash, '\n') && bytes_read > 0)
+	while (bytes_read > 0 && !ft_strchr(stash, '\n'))
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
-			return (free(stash), NULL);
-		if (bytes_read == 0)
-			break ;
+			return (free(buffer), free(stash), NULL);
 		buffer[bytes_read] = '\0';
-		stash = ft_strjoin(stash, buffer);
+		if (bytes_read > 0)
+			stash = ft_strjoin(stash, buffer);
 		if (!stash)
-			return (NULL);
+			return (free(buffer), NULL);
 	}
+	free(buffer);
 	return (stash);
 }
 
