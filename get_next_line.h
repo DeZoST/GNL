@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 20:23:03 by alede-ba          #+#    #+#             */
-/*   Updated: 2026/01/19 15:02:58 by alexis           ###   ########.fr       */
+/*   Updated: 2026/01/22 15:59:55 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-/*
-We provide a default value to allow compilation without -D BUFFER_SIZE.
-*/
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
